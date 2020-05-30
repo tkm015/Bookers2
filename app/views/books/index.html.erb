@@ -1,0 +1,23 @@
+<h2>User info</h2>
+
+
+<h2>Books</h2>
+
+<% @books.each do |book| %>
+  <table>
+  	<tr>
+      <th><%= link_to "#{book.title}",book_path(book.id) %></th>
+      <th><%= book.body %></th>
+    </tr>
+  </table>
+<% end %>
+
+<h2>New book</h2>
+<%= form_for(@book,url: '/books') do |f| %>
+    <p>Title</p>
+      <%= f.text_field :title %>
+    <p>Opinion</p>
+      <%= f.text_area :body %>
+    <br>
+      <%= f.submit 'Create Book' %>
+<% end %>
