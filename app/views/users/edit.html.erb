@@ -1,0 +1,14 @@
+<h2>User info</h2>
+
+<%= form_for(@user, url: user_path(@user.id), method: :patch) do |f| %>
+  <p>Name</p>
+    <%= f.text_field :name %>
+      <br>
+  <p>Image</p>
+    <%= f.attachment_field :profile_image %>
+      <br>
+  <p>Intoroduction</p>
+    <%= f.text_area :introduction %>
+      <br>
+  <%= f.submit "送信" %>
+<% end %>
