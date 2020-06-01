@@ -1,17 +1,22 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <h2>User info</h2>
 
-
-
-<h2>Books</h2>
-
-<% @books.each do |book| %>
-  <table>
-    <tr>
-      <th><%= link_to "#{book.title}",book_path(book.id) %></th>
-      <th><%= book.body %></th>
-    </tr>
-  </table>
-<% end %>
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+    <table>
+      <tbody>
+        <tr>
+          <td>name</td>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <td>introduction</td>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </tbody>
+    </table>
+<%= link_to "編集",edit_user_path(current_user.id) %>
 
 <h2>New book</h2>
 <%= form_for(@book,url: '/books') do |f| %>
@@ -22,3 +27,25 @@
     <br>
       <%= f.submit 'Create Book' %>
 <% end %>
+
+<h2>Books</h2>
+
+<% @books.each do |book| %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= attachment_image_tag current_user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></th>
+        <th><%= link_to "#{book.title}",book_path(book.id) %></th>
+        <th><%= book.body %></th>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+

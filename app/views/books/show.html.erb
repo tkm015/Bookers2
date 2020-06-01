@@ -1,19 +1,19 @@
 <h2>User info</h2>
 
-
-<h2>Book detail</h2>
-
-  <table>
-  	<tr>
-      <th><%= @book.title %></th>
-      <th><%= @book.body %></th>
-
-      <th><%= link_to "Edit",edit_book_path(@book.id) %></th>
-      <th><%= link_to "Destroy", url:'/books/#{@book.id}', method: :delete, data: { confirm: '本当に削除しますか？' } %>
-     
-    </tr>
-  </table>
-
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+    <table>
+      <tbody>
+        <tr>
+          <td>name</td>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <td>introduction</td>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </tbody>
+    </table>
+<%= link_to "編集",edit_user_path(current_user.id) %>
 
 <h2>New book</h2>
 <%= form_for(@books,url: '/books') do |f| %>
@@ -24,3 +24,18 @@
     <br>
       <%= f.submit 'Create Book' %>
 <% end %>
+
+<h2>Book detail</h2>
+  <table>
+   <tbody>
+  	<tr>
+      <th><%= attachment_image_tag current_user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %><br>
+        <%= link_to "#{@user.name}",user_path(@user.id) %></th>
+      <th><%= link_to "#{@book.title}",book_path(@book.id) %></th>
+      <th><%= @book.body %></th>
+
+      <th><%= link_to "Edit",edit_book_path(@book.id) %></th>
+      <th><%= link_to "Destroy", url:'/books/#{@book.id}', method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
+    </tr>
+  </tbody>
+  </table>
