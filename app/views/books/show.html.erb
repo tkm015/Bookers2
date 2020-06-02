@@ -1,3 +1,7 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
 <h2>User info</h2>
 
 <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
@@ -33,9 +37,9 @@
         <%= link_to "#{@user.name}",user_path(@user.id) %></th>
       <th><%= link_to "#{@book.title}",book_path(@book.id) %></th>
       <th><%= @book.body %></th>
-
+    <% if @user == current_user %>
       <th><%= link_to "Edit",edit_book_path(@book.id) %></th>
-      <th><%= link_to "Destroy", url:'/books/#{@book.id}', method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
-    </tr>
+      <th><%= link_to "Destroy", book_path(@book.id), method: :delete, data: { confirm: '本当に消しますか？' }%></th>
+    <% end %>
   </tbody>
   </table>

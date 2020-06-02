@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!
+
+before_action :authenticate_user!
 	def index
 		@book = Book.new
 		@users = User.all
@@ -7,7 +8,7 @@ class UsersController < ApplicationController
 
 	def show
 		@book = Book.new
-		@books = Book.all
+		@books= Book.where(user_id: params[:id])
 		@user = User.find(params[:id])
 	end
 
@@ -29,3 +30,4 @@ class UsersController < ApplicationController
     end
 
 end
+
