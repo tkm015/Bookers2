@@ -1,0 +1,30 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<div class="container"> 
+	<div class="row">
+		<div class=" col-md-offset-3 col-md-6">
+			<div class="text-left">
+<h1>welcome to <span class="glyphicon glyphicon-book" aria-hidden="true"><strong>Bookers</strong></span> !!</h1>
+  <p>In <span class="glyphicon glyphicon-book" aria-hidden="true"><strong>Bookers,</strong></span></p>
+  <p>you can share and exchange your opinions , inpressions , and emotions</p>
+  <p>about various books!</p>
+            </div>
+        </div>
+     </div>
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<div class="text-center">
+  <%= link_to "Log in",new_user_session_path,class: "btn btn-primary btn-block" %>
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<div class="text-center">
+  <%= link_to "Sign up",new_user_registration_path,class: "btn btn-success btn-block" %>
+        </div>
+    </div>
+</div>
+</div>
+

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
 
 before_action :authenticate_user!
+
+before_action :set_user, only: [:update, :edit]
+
 	def index
 		@book = Book.new
 		@users = User.all
@@ -16,10 +19,14 @@ before_action :authenticate_user!
 		@user = User.find(params[:id])
 	end
 
+
 	def update
-		user = User.find(params[:id])
-		user.update(user_params)
-		redirect_to user_path(user.id), notice: "You have updated user successfully."
+		@user = User.find(params[:id])
+		if @user.update(user_params)
+		   redirect_to user_path(@user.id), notice: "You have updated user successfully."
+		else
+		   render :edit
+		end
 	end
 
 	private
@@ -27,6 +34,14 @@ before_action :authenticate_user!
 
     def user_params
     params.require(:user).permit(:name, :profile_image, :introduction,)
+    end
+
+    def set_user
+   	     user = User.find(params[:id])
+   	  if user.id == current_user.id
+      else
+         redirect_to user_path(current_user)
+      end
     end
 
 end

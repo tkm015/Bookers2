@@ -1,37 +1,39 @@
+<div class="container"> 
+<div class="row">
+
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 <% end %>
-<h2>User info</h2>
-
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-    <table>
-      <tbody>
-        <tr>
-          <td>name</td>
-          <td><%= @user.name %></td>
-        </tr>
-        <tr>
-          <td>introduction</td>
-          <td><%= @user.introduction %></td>
-        </tr>
-      </tbody>
-    </table>
-<%= link_to "編集",edit_user_path(current_user.id) %>
-
+<div class="col-xs-3">
+  <h2>User info</h2>
+    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+  <%= link_to "",edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
 <h2>New book</h2>
-<%= form_for(@book,url: '/books') do |f| %>
+  <%= form_for(@book,url: '/books') do |f| %>
     <p>Title</p>
-      <%= f.text_field :title %>
+      <%= f.text_field :title,class: "form-control" %>
     <p>Opinion</p>
-      <%= f.text_area :body %>
+      <%= f.text_area :body,class: "form-control" %>
     <br>
-      <%= f.submit 'Create Book' %>
-<% end %>
+      <%= f.submit 'Create Book',class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
 
+<div class="col-xs-9">
 <h2>Books</h2>
-
-<% @books.each do |book| %>
-  <table>
+  <table class="table table-hover table-inverse">
     <thead>
       <tr>
         <th></th>
@@ -39,6 +41,7 @@
         <th>Opinion</th>
       </tr>
     </thead>
+    <% @books.each do |book| %>
     <tbody>
       <tr>
         <th><%= attachment_image_tag current_user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></th>
@@ -46,6 +49,10 @@
         <th><%= book.body %></th>
       </tr>
     </tbody>
+    <% end %>
   </table>
-<% end %>
+</div>
+</div>
+</div>
+
 
